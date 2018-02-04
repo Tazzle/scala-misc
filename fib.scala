@@ -6,7 +6,6 @@ def fib(n: Int): Int = {
 
   def go(n: Int, count: Int, prev: Int, curr: Int): Int = {
     val result = prev + curr
-    println(result)
     if(count == 1) go(n, count+1, prev, curr+1)
     else if(count == 2) go(n, count+1, prev, curr)
     else if(count == n) result
