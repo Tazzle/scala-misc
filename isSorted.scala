@@ -1,4 +1,4 @@
-def isSorted[A](as: Array[A], ordered: (A, A) => Boolean): Boolean = {
+def isSorted[A](as: Array[A], ordered: (A, A) => Boolean): Int = {
   @annotation.tailrec
   def loop(n: Int): Int = {
     if(n >= as.length) -1
