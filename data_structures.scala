@@ -19,8 +19,8 @@ setHead(Nil, 10)
 private def drop[A](l: List[A], n: Int): List[A] = l match {
   case Nil => Nil
   case ::(a, as) =>
-  	if(n > l.length) Nil
-    if (n == 1) as
-    else drop(as, n-1)
+  	if(n >= l.length) Nil
+    if (n > 1) drop(as, n-1)
+  	else as
 }
 drop(exampleList, 2)
