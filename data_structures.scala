@@ -24,3 +24,18 @@ private def drop[A](l: List[A], n: Int): List[A] = l match {
   	else as
 }
 drop(exampleList, 2)
+
+//exercise 3.5
+def matchesTwo(n: Int): Boolean = {
+  if (n == 2) true else false
+}
+​
+def dropWhile[A](l: List[A], f: A => Boolean): List[A] = l match {
+  case Nil => Nil
+  case ::(a, as) =>
+    if (f(a)) dropWhile(as, f)
+    else l
+}
+​
+dropWhile(List(2,2,2,4,5,6), matchesTwo)
+
