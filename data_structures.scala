@@ -47,3 +47,13 @@ def init[A](l: List[A]): List[A] = l match {
 }
 init(List(3,6,78,23,12,4556,66))
 
+//exercise 3.7
+def foldRight[A, B](as: List[A], z: B)(f: (A, B) => B): B = as match {
+  case Nil => z
+  case ::(x, xs) =>
+    if (x == z) z
+    else f(x, foldRight(xs, z)(f))
+}
+
+val listOfDoubles = List(1.0, 2.0, 3.0, 0.0, 5.0, 6.0, 7.0, 8.0, 9.0)
+foldRight(listOfDoubles, 0.0)(_*_)
