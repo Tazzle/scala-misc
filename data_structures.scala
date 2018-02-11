@@ -36,6 +36,14 @@ def dropWhile[A](l: List[A], f: A => Boolean): List[A] = l match {
     if (f(a)) dropWhile(as, f)
     else l
 }
-​
 dropWhile(List(2,2,2,4,5,6), matchesTwo)
+
+//exercise 3.6
+def init[A](l: List[A]): List[A] = l match {
+  case Nil => Nil
+  case ::(a, as) =>
+  	if(as.length > 1)::(a, init(::(as.head, as.tail)))
+    else List(a)
+}
+init(List(3,6,78,23,12,4556,66))
 
