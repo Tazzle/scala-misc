@@ -68,5 +68,12 @@ private def foldLeft[A, B](as: List[A], z: B)(f: (B, A) => B): B = as match {
   case Nil       => z
   case ::(x, xs) => foldLeft(xs, f(z, x))(f)
 }
-
 foldLeft(List(1,2,3), 0.0)(_+_)
+
+//exercise 3.11
+def sum(ns: List[Int]) = foldLeft(ns, 0)(_ + _)
+sum(List(1,2,3))
+def product(ns: List[Double]) = foldLeft(ns, 1.0)(_*_)
+product(List(1.0, 2.0, 3.0))
+def length[A](as: List[A]): Int = foldLeft(as, Nil: List[A])((x,y) => ::(y, x)).length  
+length(List(1,2,3,4,5,6))
