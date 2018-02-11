@@ -60,3 +60,13 @@ foldRight(listOfDoubles, 0.0)(_*_)
 
 //exercise 3.9
 def length[A](as: List[A]): Int = foldRight(as, Nil:List[A])(::(_,_)).length
+
+
+//exercise 3.10
+@annotation.tailrec
+private def foldLeft[A, B](as: List[A], z: B)(f: (B, A) => B): B = as match {
+  case Nil       => z
+  case ::(x, xs) => foldLeft(xs, f(z, x))(f)
+}
+
+foldLeft(List(1,2,3), 0.0)(_+_)
