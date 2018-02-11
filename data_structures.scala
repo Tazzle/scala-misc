@@ -57,3 +57,6 @@ def foldRight[A, B](as: List[A], z: B)(f: (A, B) => B): B = as match {
 
 val listOfDoubles = List(1.0, 2.0, 3.0, 0.0, 5.0, 6.0, 7.0, 8.0, 9.0)
 foldRight(listOfDoubles, 0.0)(_*_)
+
+//exercise 3.9
+def length[A](as: List[A]): Int = foldRight(as, Nil:List[A])(::(_,_)).length
