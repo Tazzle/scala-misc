@@ -42,7 +42,7 @@ dropWhile(List(2,2,2,4,5,6), matchesTwo)
 def init[A](l: List[A]): List[A] = l match {
   case Nil => Nil
   case ::(a, as) =>
-  	if(as.length > 1)::(a, init(::(as.head, as.tail)))
+  	if(as.length > 1)::(a, init(as))
     else List(a)
 }
 init(List(3,6,78,23,12,4556,66))
@@ -77,3 +77,22 @@ def product(ns: List[Double]) = foldLeft(ns, 1.0)(_*_)
 product(List(1.0, 2.0, 3.0))
 def length[A](as: List[A]): Int = foldLeft(as, Nil: List[A])((x,y) => ::(y, x)).length  
 length(List(1,2,3,4,5,6))
+
+//exercise 3.12 using ::: (not introduced in book at this stage)
+def reverse[A](l: List[A]): List[A] = l match {
+  case Nil => Nil
+  case ::(a, as) => reverse(as) ::: a :: Nil
+}
+reverse(List(1, 2, 3))
+
+//exercise 3.12 - used hint for this - not 100% fruit of own brainwave
+//pre-hint assumed was possible using only Cons and recursion ***
+def reverse[A](l: List[A]): List[A] = {
+  @annotation.tailrec
+  def go(l: List[A], temp: List[A]): List[A] = l match {
+    case Nil => tempList
+    case ::(a, as) => loop(as, ::(a, tempList))
+  }
+  go(l, Nil)  
+}
+reverse(List(1, 2, 3, 4, 5, 6))
