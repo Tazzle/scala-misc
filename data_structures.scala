@@ -99,3 +99,7 @@ reverse(List(1, 2, 3, 4, 5, 6))
 
 //exercise 3.12 - write reverse using a *fold*
 def reverse[A](l: List[A], temp: List[A]):List[A] = foldLeft(l, temp)((x,y) => ::(y,x))
+
+//exercise 3.14 `append` item at end of list
+def append[A](l: List[A], value: A): List[A] = foldRight(l, List(value))((x,y) => ::(x,y))                        
+append(List(1,2,3), 4)
