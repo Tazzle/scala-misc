@@ -90,9 +90,12 @@ reverse(List(1, 2, 3))
 def reverse[A](l: List[A]): List[A] = {
   @annotation.tailrec
   def go(l: List[A], temp: List[A]): List[A] = l match {
-    case Nil => tempList
-    case ::(a, as) => loop(as, ::(a, tempList))
+    case Nil       => temp
+    case ::(a, as) => go(as, ::(a, temp))
   }
-  go(l, Nil)  
+  go(l, Nil)
 }
 reverse(List(1, 2, 3, 4, 5, 6))
+
+//exercise 3.12 - write reverse using a *fold*
+def reverse[A](l: List[A], temp: List[A]):List[A] = foldLeft(l, temp)((x,y) => ::(y,x))
