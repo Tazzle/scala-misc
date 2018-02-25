@@ -100,6 +100,20 @@ reverse(List(1, 2, 3, 4, 5, 6))
 //exercise 3.12 - write reverse using a *fold*
 def reverse[A](l: List[A], temp: List[A]):List[A] = foldLeft(l, temp)((x,y) => ::(y,x))
 
+//exercise 3.13 writing foldLeft in terms of foldRight (get stack overflow)
+private def foldLeft[A, B](as: List[A], z: B)(f: (B, A) => B): B = as match {
+  case Nil => z
+  case ::(x, xs) => foldRight(as, z)((b,a) => f(a,b))
+}
+foldLeft(List(1,2,3), 0.0)(_+_)
+
+//exercise 3.13 writing foldRight in terms of foldLeft
+def foldRight[A,B](as: List[A], z: B)(f: (A, B) => B): B = as match {
+  case Nil => z
+  case ::(x, xs) => foldLeft(as.reverse, z)((b,a)=> f(a,b))
+}
+foldRight(List(1,2,3), 0.0)(_+_)
+
 //exercise 3.14 `append` item at end of list
 def append[A](l: List[A], value: A): List[A] = foldRight(l, List(value))((x,y) => ::(x,y))                        
 append(List(1,2,3), 4)
