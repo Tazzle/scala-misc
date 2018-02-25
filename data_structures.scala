@@ -128,3 +128,14 @@ def flattenLists[A](as: List[List[A]]): List[A] = {
   go(as, Nil)
 }
 flattenLists(List(List(1,2,3), List(2,3,4)))
+
+//3.16 unsure whether can use pre-existing functions `append` or `reverse`
+def transformList(l: List[Int], temp: List[Int]): List[Int] = {
+  def go(l:List[Int], temp: List[Int]): List[Int] = l match {  
+  case Nil => temp
+  case ::(a,as) => 
+  go(as, ::(a+1, temp))
+}
+  go(l, temp)
+}
+transformList(List(1,2,3), Nil)
