@@ -147,3 +147,15 @@ def transformList(l: List[Int], temp: List[Int]): List[Int] = {
   foldRight(l, temp)((a,b) => ::(a+1,b))  
 }
 transformList(List(1,2,3), Nil)
+
+//3.17 write a function that turns each value in a List[Double] into a String
+//using foldRight
+def transformDoubleToString(l:List[Double], temp:List[String]): List[String] = 
+foldRight(l, temp)((a,b) => ::(a.toString, b))
+transformDoubleToString(List(1.0,2.0,3.44), Nil)
+
+//3.17 write a function that turns each value in a List[Double] into a String
+//using foldLeft
+def transformDoubleToString(l: List[Double], temp: List[String]): List[String] = 
+foldLeft(l, temp)((b,a) => append(b, a.toString))
+transformDoubleToString(List(1.0,2.0,3.44), Nil)
