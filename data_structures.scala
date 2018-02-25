@@ -129,7 +129,8 @@ def flattenLists[A](as: List[List[A]]): List[A] = {
 }
 flattenLists(List(List(1,2,3), List(2,3,4)))
 
-//3.16 unsure whether can use pre-existing functions `append` or `reverse`
+//3.16 write a function that transforms a list of integers by adding 1 to each element. 
+//unsure whether can use append or reverse
 def transformList(l: List[Int], temp: List[Int]): List[Int] = {
   def go(l:List[Int], temp: List[Int]): List[Int] = l match {  
   case Nil => temp
@@ -137,5 +138,12 @@ def transformList(l: List[Int], temp: List[Int]): List[Int] = {
   go(as, ::(a+1, temp))
 }
   go(l, temp)
+}
+transformList(List(1,2,3), Nil)
+
+//3.16 write a function that transforms a list of integers by adding 1 to each element. 
+//after looking at hint  - use a foldRight
+def transformList(l: List[Int], temp: List[Int]): List[Int] = {
+  foldRight(l, temp)((a,b) => ::(a+1,b))  
 }
 transformList(List(1,2,3), Nil)
