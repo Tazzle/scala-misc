@@ -58,11 +58,11 @@ def foldRight[A, B](as: List[A], z: B)(f: (A, B) => B): B = as match {
 val listOfDoubles = List(1.0, 2.0, 3.0, 0.0, 5.0, 6.0, 7.0, 8.0, 9.0)
 foldRight(listOfDoubles, 0.0)(_*_)
 
-//exercise 3.9
+//exercise 3.9 compute the length of a list using foldRight
 def length[A](as: List[A]): Int = foldRight(as, Nil:List[A])(::(_,_)).length
 
 
-//exercise 3.10
+//exercise 3.10 write a general list-recursion function, foldLeft, that is tail-recursive
 @annotation.tailrec
 private def foldLeft[A, B](as: List[A], z: B)(f: (B, A) => B): B = as match {
   case Nil       => z
@@ -117,3 +117,14 @@ foldRight(List(1,2,3), 0.0)(_+_)
 //exercise 3.14 `append` item at end of list
 def append[A](l: List[A], value: A): List[A] = foldRight(l, List(value))((x,y) => ::(x,y))                        
 append(List(1,2,3), 4)
+
+//exercise 3.15 - Write a function that concatenates a list of lists into a single list (using functions we have already defined)
+def flattenLists[A](as: List[List[A]]): List[A] = {
+  def go(l: List[List[A]], temp: List[A]): List[A] = l match {
+    case Nil => temp
+    case ::(a, as) =>
+    go(as, foldLeft(a, temp)((b, a) => append(b, a)))
+  }
+  go(as, Nil)
+}
+flattenLists(List(List(1,2,3), List(2,3,4)))
