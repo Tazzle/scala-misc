@@ -159,3 +159,9 @@ transformDoubleToString(List(1.0,2.0,3.44), Nil)
 def transformDoubleToString(l: List[Double], temp: List[String]): List[String] = 
 foldLeft(l, temp)((b,a) => append(b, a.toString))
 transformDoubleToString(List(1.0,2.0,3.44), Nil)
+
+//Exercise 3.18
+//Write a function map that generalizes modifying each element in a list 
+//while maintaining the structure of the list. 
+def map[A, B](as: List[A])(f: A => B): List[B] = foldRight(as, Nil: List[B])((a, b) => ::(f(a), b))
+map(List(1, 2, 3))((x) => x.toString)
