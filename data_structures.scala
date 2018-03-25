@@ -165,3 +165,12 @@ transformDoubleToString(List(1.0,2.0,3.44), Nil)
 //while maintaining the structure of the list. 
 def map[A, B](as: List[A])(f: A => B): List[B] = foldRight(as, Nil: List[B])((a, b) => ::(f(a), b))
 map(List(1, 2, 3))((x) => x.toString)
+
+//Exercise 3.19
+//Write a function filter that removes elements from a list 
+//unless they satisfy a given predicate. Use it to remove all odd numbers from a List[Int].
+def filter[A](as: List[A])(f: A => Boolean): List[A] = as match {
+  case Nil => as
+  case ::(x, xs) => foldRight(as, Nil: List[A])((a,b) => if (f(a)) ::(a, b) else b)  	
+}
+filter(List(1, 2, 3, 4))((x) => if (x % 2 == 0) true else false)
