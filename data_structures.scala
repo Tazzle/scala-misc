@@ -189,3 +189,18 @@ def filter[A](as: List[A])(f: A => Boolean): List[A] = as match{
   case ::(x, xs) => flatMap(as)(a => if(f(a)) ::(a, Nil) else Nil)
 }
 filter(List(1, 2, 3, 4))((x) => if (x % 2 == 0) true else false)
+
+//exercise 3.22
+//Write a function that accepts two lists and 
+//constructs a new list by adding corresponding elements.
+//***** using Scastie. implicit conversion not available. using scala.Int
+def zipIntegerLists[Int](as1: List[scala.Int], as2: List[scala.Int]): List[scala.Int] = {
+  @annotation.tailrec
+  def go(l1: List[scala.Int], l2: List[scala.Int], result: List[scala.Int]): List[scala.Int] = l1 match {
+    case Nil => result
+    case ::(x, xs) => 
+    go(l1.tail, l2.tail, ::(sum(List(l1.head, l2.head)), result))
+  }
+  reverse(go(as1, as2, Nil: List[scala.Int]))
+}
+zipIntegerLists(List(1,2,3), List(4,5,6))
