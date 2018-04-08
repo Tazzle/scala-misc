@@ -174,3 +174,10 @@ def filter[A](as: List[A])(f: A => Boolean): List[A] = as match {
   case ::(x, xs) => foldRight(as, Nil: List[A])((a,b) => if (f(a)) ::(a, b) else b)  	
 }
 filter(List(1, 2, 3, 4))((x) => if (x % 2 == 0) true else false)
+
+//Exercise 3.20
+//Write a function flatMap that works like map
+//except that the function given will return a list instead of a single result, 
+//and that list should be inserted into the final resulting list
+def flatMap[A,B](as: List[A])(f: A => List[B]): List[B] = flattenLists(map(as)(f))
+flatMap(List(1,2,3))(i => List(i,i))
