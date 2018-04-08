@@ -181,3 +181,11 @@ filter(List(1, 2, 3, 4))((x) => if (x % 2 == 0) true else false)
 //and that list should be inserted into the final resulting list
 def flatMap[A,B](as: List[A])(f: A => List[B]): List[B] = flattenLists(map(as)(f))
 flatMap(List(1,2,3))(i => List(i,i))
+
+//exercse 3.21
+//Use flatMap to implement filter.
+def filter[A](as: List[A])(f: A => Boolean): List[A] = as match{
+  case Nil => as
+  case ::(x, xs) => flatMap(as)(a => if(f(a)) ::(a, Nil) else Nil)
+}
+filter(List(1, 2, 3, 4))((x) => if (x % 2 == 0) true else false)
