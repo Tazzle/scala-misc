@@ -204,3 +204,20 @@ def zipIntegerLists[Int](as1: List[scala.Int], as2: List[scala.Int]): List[scala
   reverse(go(as1, as2, Nil: List[scala.Int]))
 }
 zipIntegerLists(List(1,2,3), List(4,5,6))
+
+//exercse 3.23
+//Generalize the function you just wrote so that 
+//it’s not specific to integers or addition.
+//Name your generalized function zipWith.
+//***vague description, assuming it has to return tuples, 
+//like Scala's `zipWithIndex`***
+def zipWith[A](as1: List[A], as2: List[A]): List[(A,A)] = {
+  @annotation.tailrec
+  def go(l1: List[A], l2: List[A], result: List[(A,A)]): List[(A,A)] = l1 match {
+    case Nil => result
+    case ::(x,xs) => go(l1.tail, l2.tail, ::((l1.head, l2.head), result))
+  }  
+  reverse(go(as1, as2, Nil: List[(A,A)]))
+}
+zipWith(List(1,2,"test"), List("test", 2, 1))
+
