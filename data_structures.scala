@@ -221,3 +221,49 @@ def zipWith[A](as1: List[A], as2: List[A]): List[(A,A)] = {
 }
 zipWith(List(1,2,"test"), List("test", 2, 1))
 
+// exercise 3.24 
+//Hard: As an example, implement hasSubsequence for checking 
+//whether a List contains another List as a subsequence.
+def hasSubsequence[A](sup: List[A], sub: List[A]): Boolean = {
+  def go(ls1: List[A], ls2: List[A], isMatch: Boolean): Boolean = ls1 match {
+    case Nil => isMatch
+    case ::(x, xs) => {
+      val result: Boolean = ls2 match {
+        case Nil => isMatch
+        case ::(y, ys) => {
+          if (x == y) go(xs, ys, true) else go(xs, sub, false)
+        }
+      }
+      result
+    }
+  }
+  // it is technically possible that `Nil` is a subsequence of any list.
+  // so could return true if empty list passed in as sub.
+  if (sup == Nil || sub == Nil) false else go(sup, sub, false)
+}
+// exercise 3.24  (using double matching)
+//Hard: As an example, implement hasSubsequence for checking 
+//whether a List contains another List as a subsequence.
+def hasSubsequence2[A](sup: List[A], sub: List[A]): Boolean = {
+  def go(ls1: List[A], ls2: List[A], isMatch: Boolean): Boolean =
+    (ls1, ls2) match {
+      case (Nil, Nil)       => isMatch
+      case (::(x, xs), Nil) => isMatch
+      case (Nil, ::(y, ys)) => isMatch
+      case (::(x, xs), ::(y, ys)) => {
+        if (x == y) go(xs, ys, true)
+        else go(xs, sub, false)
+      }
+    }
+  if (sup == Nil || sub == Nil) false else go(sup, sub, false)
+}
+hasSubsequence(List(1, 3, 4), List(1, 3))
+hasSubsequence(List(1, 3, 4), List(1, 2))
+hasSubsequence(List(1, 3, 4), List(1))
+hasSubsequence(List(1, 3, 4), List(3))
+hasSubsequence(List(1, 3, 4), List(3,4))
+hasSubsequence(List(1, 3, 4), List(4))
+hasSubsequence(List(1, 3, 4), Nil)
+hasSubsequence(Nil, List(3))
+hasSubsequence(List(1, 3, 4, 5), List(3, 5))
+
