@@ -225,7 +225,7 @@ zipWith(List(1,2,"test"), List("test", 2, 1))
 //Hard: As an example, implement hasSubsequence for checking 
 //whether a List contains another List as a subsequence.
 def hasSubsequence[A](sup: List[A], sub: List[A]): Boolean = {
-  def go(ls1: List[A], ls2: List[A], isMatch: Boolean): Boolean = ls1 match {
+  def go(sup: List[A], sub: List[A], isMatch: Boolean): Boolean = sup match {
     case Nil => isMatch
     case ::(x, xs) => {
       val result: Boolean = ls2 match {
@@ -245,8 +245,8 @@ def hasSubsequence[A](sup: List[A], sub: List[A]): Boolean = {
 //Hard: As an example, implement hasSubsequence for checking 
 //whether a List contains another List as a subsequence.
 def hasSubsequence2[A](sup: List[A], sub: List[A]): Boolean = {
-  def go(ls1: List[A], ls2: List[A], isMatch: Boolean): Boolean =
-    (ls1, ls2) match {
+  def go(sup: List[A], sub: List[A], isMatch: Boolean): Boolean =
+    (sup, sub) match {
       case (Nil, Nil)       => isMatch
       case (::(x, xs), Nil) => isMatch
       case (Nil, ::(y, ys)) => isMatch
