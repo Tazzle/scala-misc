@@ -255,6 +255,8 @@ def hasSubsequence2[A](sup: List[A], sub: List[A]): Boolean = {
         else go(xs, sub, false)
       }
     }
+  // it is technically possible that `Nil` is a subsequence of any list.
+  // so could return true if empty list passed in as sub.
   if (sup == Nil || sub == Nil) false else go(sup, sub, false)
 }
 hasSubsequence(List(1, 3, 4), List(1, 3))
