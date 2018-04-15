@@ -286,7 +286,7 @@ def upperBranch = Branch(lowerBranchLeft, lowerBranchRight)
 
 def size[A](tree: Tree[A], count: Int = 0): Int = tree match {
    case Branch(left, right) => {
-        sum(List(size(left, count + 1), size(right, 0)))
+        size(left, count + 1) + size(right, 0)
       }
       case Leaf(value) => {
         count + 1
