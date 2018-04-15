@@ -269,3 +269,42 @@ hasSubsequence(List(1, 3, 4), Nil)
 hasSubsequence(Nil, List(3))
 hasSubsequence(List(1, 3, 4, 5), List(3, 5))
 
+//exercise 3.25
+//Write a function size that counts the number of nodes (leaves and branches) in a tree.
+sealed trait Tree[+A]
+case class Leaf[A](value: A) extends Tree[A]
+case class Branch[A](left: Tree[A], right: Tree[A]) extends Tree[A]
+
+def leafA = Leaf("a")
+def leafB = Leaf("b")
+def leafC = Leaf("c")
+def leafD = Leaf("d")
+
+def lowerBranchLeft = Branch(leafA, leafB)
+def lowerBranchRight = Branch(leafC, leafD)
+def upperBranch = Branch(lowerBranchLeft, lowerBranchRight)
+
+def size[A](tree: Tree[A]): Int = {
+
+  def go[A](tree: Tree[A], count: Int): Int = {
+    val result: Int = tree match {
+      case Branch(left, right) => {
+        sum(List(go(left, count + 1), go(right, 0)))
+      }
+      case Leaf(value) => {
+        go(new Tree[A] {}, count + 1)
+      }
+      case _ => count
+    }
+    result
+  }
+
+  go(tree, 0)
+}
+ size(leafA)
+ size(leafB)
+ size(leafC)
+ size(leafD)
+ size(lowerBranchLeft)
+ size(lowerBranchRight)
+ size(upperBranch)
