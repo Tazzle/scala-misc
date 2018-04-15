@@ -284,22 +284,13 @@ def lowerBranchLeft = Branch(leafA, leafB)
 def lowerBranchRight = Branch(leafC, leafD)
 def upperBranch = Branch(lowerBranchLeft, lowerBranchRight)
 
-def size[A](tree: Tree[A]): Int = {
-
-  def go[A](tree: Tree[A], count: Int): Int = {
-    val result: Int = tree match {
-      case Branch(left, right) => {
-        sum(List(go(left, count + 1), go(right, 0)))
+def size[A](tree: Tree[A], count: Int = 0): Int = tree match {
+   case Branch(left, right) => {
+        sum(List(size(left, count + 1), size(right, 0)))
       }
       case Leaf(value) => {
-        go(new Tree[A] {}, count + 1)
+        count + 1
       }
-      case _ => count
-    }
-    result
-  }
-
-  go(tree, 0)
 }
  size(leafA)
  size(leafB)
