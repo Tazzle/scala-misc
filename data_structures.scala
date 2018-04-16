@@ -299,3 +299,22 @@ def size[A](tree: Tree[A], count: Int = 0): Int = tree match {
  size(lowerBranchLeft)
  size(lowerBranchRight)
  size(upperBranch)
+
+
+//exercise 3.26
+//Write a function maximum that returns the maximum element in a Tree[Int].
+//(Note: In Scala, you can use x.max(y) or x max y to compute the maximum of two integers x and y.)
+
+def leafA = Leaf(1)
+def leafB = Leaf(2)
+def leafC = Leaf(3)
+def leafD = Leaf(4)
+
+def maximum(tree: Tree[Int]): Int = tree match {
+  case Branch(left, right) =>
+    maximum(left) max maximum(right)
+  case Leaf(value) =>
+    value
+}
+
+maximum(upperBranch)
