@@ -318,3 +318,15 @@ def maximum(tree: Tree[Int]): Int = tree match {
 }
 
 maximum(upperBranch)
+
+//exercise 3.27
+//Write a function depth that returns the maximum path length 
+//from the root of a tree to any leaf.
+def depth(tree: Tree[Int], count: Int = 0): Int = tree match {
+  case Branch(left, right) =>
+  	depth(left, count + 1) max depth(right, count + 1)
+  case Leaf(value) =>
+  	count + 1
+}
+depth(upperBranch)
+
