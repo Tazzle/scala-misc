@@ -330,3 +330,19 @@ def depth(tree: Tree[Int], count: Int = 0): Int = tree match {
 }
 depth(upperBranch)
 
+
+//exercise 3.28
+//Write a function map, analogous to the method of the same name on List, 
+//that modifies each element in a tree with a given function.
+def map[A, B](t: Tree[A])(f: A => B): Tree[B] = {
+  def go(tree: Tree[A]): Tree[B] = tree match {
+    case Branch(left, right) =>
+      Branch(go(left), go(right))
+    case Leaf(value) =>
+      Leaf(f(value))
+  }
+  go(t)
+}
+
+map(upperBranch)(x => x.toFloat)
+
