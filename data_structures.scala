@@ -351,7 +351,6 @@ def fold[A, B](t: Tree[A])(f1: A => B)(f2: (B, B) => B): B = t match {
     f2(fold(left)(f1)(f2), fold(right)(f1)(f2))
   case Leaf(value) =>
     f1(value)
-
 }
 
 def size[A](tree: Tree[A]) = {
@@ -359,15 +358,15 @@ def size[A](tree: Tree[A]) = {
 }
 
 def depth[A](tree: Tree[A]) = {
-  fold(upperBranch)(value => 1)((x, y) => 1 + x max y)
+  fold(tree)(value => 1)((x, y) => 1 + x max y)
 }
 
 def maximum[A](tree: Tree[A]) = {
-  fold(upperBranch)(value => value)((x, y) => x max y)
+  fold(tree)(value => value)((x, y) => x max y)
 }
 /*** explicitly specify return type of f1 as Tree[B]
  as return type of f2 had to be same, without specifying it
  was expecting a return type of Leaf[B] ***/
-def map[A, B](t: Tree[A])(f: A => B): Tree[B] = {
- fold(t)(value => Leaf(f(value)): Tree[B])((x,y) => Branch(x,y))
+def map[A, B](tree: Tree[A])(f: A => B): Tree[B] = {
+ fold(tree)(value => Leaf(f(value)): Tree[B])((x,y) => Branch(x,y))
 }
