@@ -365,7 +365,9 @@ def depth[A](tree: Tree[A]) = {
 def maximum[A](tree: Tree[A]) = {
   fold(upperBranch)(value => value)((x, y) => x max y)
 }
-
+/*** explicitly specify return type of f1 as Tree[B]
+ as return type of f2 had to be same, without specifying it
+ was expecting a return type of Leaf[B] ***/
 def map[A, B](t: Tree[A])(f: A => B): Tree[B] = {
-  fold(t)(value => Branch(f(value), f(value)))((x, y) => Branch(x, y))
+ fold(t)(value => Leaf(f(value)): Tree[B])((x,y) => Branch(x,y))
 }
