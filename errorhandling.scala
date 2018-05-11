@@ -36,3 +36,25 @@ case object None extends Option[Nothing]
 val integerOption = Some(16)
 None.getOrElse(2)
 integerOption.flatMap(x => Some(x.toDouble))
+
+
+// 4) or else
+trait Option[+A] {
+  def map[B](f: A => B): Option[B] = this match {
+    case Some(value) => Some(f(value))
+    case None        => None
+  }
+  def getOrElse[B >: A](default: => B): B = this match {
+    case Some(value) => value
+    case None => default
+  }
+    def flatMap[B](f: A => Option[B]): Option[B] = {
+      this.map(x => f(x)).getOrElse(None)
+  }
+  def orElse[B >: A](ob: => Option[B]): Option[B] = {
+    if(this == None) ob
+    else this
+  }
+}
+
+integerOption.orElse(Some(2))
