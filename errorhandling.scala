@@ -35,3 +35,18 @@ None.getOrElse(2)
 Some(1).flatMap(x => Some(x.toDouble))
 None.orElse(Some(2))
 Some(1).filter(x => x > 1)
+
+//exercise 4.2
+//Implement the variance function in terms of flatMap. 
+//If the mean of a sequence is m, the variance is the mean of math.pow(x - m, 2)
+//for each element x in the sequence.
+
+def variance(xs: Seq[Double]): Option[Double] = {
+  if (xs.isEmpty) None
+  else
+    Some(xs)
+      .flatMap(xs =>
+        Some(xs.map(x => math.pow(x + mean(xs).getOrElse(0.0), 2))))
+      .flatMap(x => mean(x))
+
+}
